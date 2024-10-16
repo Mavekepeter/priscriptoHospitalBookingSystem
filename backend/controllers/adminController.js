@@ -50,7 +50,6 @@ const addDoctor = async (req, res) => {
             degree,
             fees,
             experience,
-            available,
             about,
             address: JSON.parse(address), // Assuming `address` is a JSON string
             date: Date.now()
