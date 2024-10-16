@@ -6,7 +6,7 @@ import jwt from 'jsonwebtoken'
 
 const addDoctor = async (req, res) => {
     try {
-        const { name, email, password, address, speciality, degree, about, fees, experience, } = req.body;
+        const { name, email, password, address, speciality, degree, about, fees, experience } = req.body;
         const imageFile = req.file;
 
         console.log(req.file); // Check file structure
@@ -50,6 +50,7 @@ const addDoctor = async (req, res) => {
             degree,
             fees,
             experience,
+            available,
             about,
             address: JSON.parse(address), // Assuming `address` is a JSON string
             date: Date.now()
@@ -79,6 +80,17 @@ const loginAdmin = async (req,res) =>{
         console.log(error);
         res.json({ success: false, message: error.message });
     }
+
+}
+//API to get all Doctors list for admin list
+const allDoctors = async (req,res) =>{
+     try {
+        const doctors = await doctorModel.find({}).select('-password')
+        res.json({success:true,doctors})
+     } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message });
+     }
 }
 
-export { addDoctor,loginAdmin };
+export { addDoctor,loginAdmin,allDoctors };
