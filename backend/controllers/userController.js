@@ -3,6 +3,8 @@ import bcrypt  from 'bcrypt'
 import userModel from '../models/userModel.js'
 import jwt from 'jsonwebtoken'
 import {v2 as cloudinary} from 'cloudinary'
+import doctorModel from '../models/doctorModel.js'
+import appointmentModel from '../models/appointmentModel.js'
 // api to register user
 
 const registerUser = async (req,res) =>{
@@ -93,4 +95,52 @@ const updateProfile = async(req,res)=>{
         res.json({ success: false, message: error.message });
     }
 }
-export {registerUser,loginUser,getProfile,updateProfile}
+
+//API to book appointment
+const bookAppointment = async (req,res) =>{
+    try {
+        const {userId,docId,slotDate,slotTime} = req.body
+        const docData = await doctorModel.findById(docId).select('-password')
+        if (!docData.available) {
+            return res.json({success:false,message:'Doctor not available'})
+        }
+        let slot_booked = docData.slot_booked
+        //checking for slots availability
+        if (slot_booked[slotDate]) {
+            if (slot_booked[slotDate].includes(slotTime)) {
+                return res.json({success:false,message:'Slot not available'})
+            }else{
+                slot_booked[slotDate].push(slotTime)
+            }
+        }else{
+            slot_booked[slotDate] = []
+            slot_booked[slotDate].push(slotTime)
+        }
+        const userData = await userModel.findById(userId).select('-password')
+
+        delete docData.slot_booked
+
+        const appointmentData = {
+            userId,
+            docId,
+            userData,
+            docData,
+            amount:docData.fees,
+            slotTime,
+            slotDate,
+            date:Date.now()
+        }
+        const newAppointment = new appointmentModel(appointmentData)
+        await newAppointment.save()
+        
+
+        // save new slots data in docData
+        await doctorModel.findByIdAndUpdate(docId,{slot_booked})
+        res.json({success:true,message:'Appointment Booked'})
+    } catch (error) {
+        console.log(error);
+        res.json({success:false,message:error.message})
+        
+    }
+}
+export {registerUser,loginUser,getProfile,updateProfile,bookAppointment}

@@ -100,8 +100,8 @@ const Myprofile = () => {
          <p className='font-medium'>Birthday:</p>
          {
           isEdit ? 
-          <input className='max-w-28 bg-gray-100' type="date" onChange={(e)=>setUserData(prev =>({...prev,DOb: e.target.value}))} value={userData.DOb} />
-          : <p className='text-gray-400'>{userData.DOb}</p>
+          <input className='max-w-28 bg-gray-100' type="date" onChange={(e)=>setUserData(prev =>({...prev,dob: e.target.value}))} value={userData.dob} />
+          : <p className='text-gray-400'>{userData.dob}</p>
          }
         </div>
       </div>
