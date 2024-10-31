@@ -135,7 +135,7 @@ const bookAppointment = async (req,res) =>{
         
 
         // save new slots data in docData
-        await doctorModel.findByIdAndUpdate(docId,{slot_booked})
+        await doctorModel.findByIdAndUpdate(docId, { slot_booked });
         res.json({success:true,message:'Appointment Booked'})
     } catch (error) {
         console.log(error);
@@ -143,4 +143,16 @@ const bookAppointment = async (req,res) =>{
         
     }
 }
-export {registerUser,loginUser,getProfile,updateProfile,bookAppointment}
+//API to get user appointment for frontend my-appointment page
+const listAppointment = async(req,res)=>{
+    try {
+        const {userId} = req.body
+        const appointments = await appointmentModel.find({userId})
+
+        res.json({success:true,appointments})
+    } catch (error) {
+        console.log(error);
+        res.json({success:false,message:error.message})
+    }
+}
+export {registerUser,loginUser,getProfile,updateProfile,bookAppointment,listAppointment}

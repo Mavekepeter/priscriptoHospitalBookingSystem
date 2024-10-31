@@ -14,50 +14,61 @@ const Appointment = () => {
   const [docInfo, setDocInfo] = useState(null)
   const [docSlots, setDocSlots] = useState([])
   const [slotIndex, setSlotIndex] = useState(0)
-  const [slotTime, setSlotTime] = useState(0)
+  const [slotTime, setSlotTime] = useState('')
   const fetchDocInfo = async () =>{
     const docInfo = doctors.find(doc =>doc._id ===docId)
     setDocInfo(docInfo)    
   }
 
-  const getAvailableSlots = async () =>{
-    setDocSlots([])
+  const getAvailableSlots = async () => {
+  setDocSlots([]);
+  let today = new Date();
 
-    //geting current date
-    let today = new Date()
+  for (let i = 0; i < 7; i++) {
+    let currentDate = new Date(today);
+    currentDate.setDate(today.getDate() + i);
 
-    for(let i = 0;i<7; i++){
-      //getting date with index
-      let currentDate = new Date(today)
-      currentDate.setDate(today.getDate()+i)
-      //settting end time of the date with index
-      let endTime = new Date()
-      endTime.setDate(today.getDate() + i)
-      endTime.setHours(21,0,0,0)
+    let endTime = new Date();
+    endTime.setDate(today.getDate() + i);
+    endTime.setHours(21, 0, 0, 0);
 
-      //setting hours
-      if (today.getDate()=== currentDate.getDate()) {
-        currentDate.setHours(currentDate.getHours() >10 ? currentDate.getHours() +1 : 10)
-        currentDate.setMinutes(currentDate.getMinutes()> 30 ? 30 : 0)
-      }else{
-        currentDate.setHours(10)
-        currentDate.setMinutes(0)
-      }
-      let timeSlots = []
-      while(currentDate < endTime){
-        let formatedTime = currentDate.toLocaleTimeString([],{ hour: '2-digit',minute: '2-digit'})
+    // Adjust starting hour and minute based on the day
+    if (today.getDate() === currentDate.getDate()) {
+      currentDate.setHours(currentDate.getHours() > 10 ? currentDate.getHours() + 1 : 10);
+      currentDate.setMinutes(currentDate.getMinutes() > 30 ? 30 : 0);
+    } else {
+      currentDate.setHours(10);
+      currentDate.setMinutes(0);
+    }
 
-        //add slot to array
+    let timeSlots = [];
+    while (currentDate < endTime) {
+      let formattedTime = currentDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+      let day = currentDate.getDate();
+      let month = currentDate.getMonth() + 1;
+      let year = currentDate.getFullYear();
+
+      const slotDate = `${day}_${month}_${year}_`;
+      const slotTime = formattedTime;
+
+      // Updated condition for checking availability
+      const isSlotAvailable = !(docInfo?.slots_booked?.[slotDate] && docInfo.slots_booked[slotDate].includes(slotTime));
+
+      if (isSlotAvailable) {
         timeSlots.push({
           datetime: new Date(currentDate),
-          time: formatedTime
-        })
-        //Increment current time by 30 minutes
-        currentDate.setMinutes(currentDate.getMinutes() + 30)
+          time: formattedTime,
+        });
       }
-      setDocSlots(prev =>([...prev, timeSlots]))
+
+      currentDate.setMinutes(currentDate.getMinutes() + 30);
     }
+
+    setDocSlots((prev) => [...prev, timeSlots]);
   }
+};
+
   useEffect(()=>{
     fetchDocInfo()
   },[doctors,docId])
