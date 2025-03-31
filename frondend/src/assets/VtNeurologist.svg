@@ -1,0 +1,25 @@
+<svg
+  width="300"
+  height="300"
+  viewBox="0 0 300 300"
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+>
+  <!-- Background Circle -->
+  <circle cx="150" cy="150" r="140" fill="lightblue" stroke="black" stroke-width="4"/>
+  
+  <!-- Animal Head Shape -->
+  <path d="M100 200 Q80 100 150 80 Q220 100 200 200" fill="#F5CBA7" stroke="black" stroke-width="3"/>
+  
+  <!-- Brain Illustration -->
+  <path d="M120 110 Q140 70 170 110 T190 130 Q180 115 160 110 Q140 105 120 115 Q110 120 125 135" 
+        fill="none" stroke="#3366FF" stroke-width="5"/>
+  
+  <!-- Brain Connections -->
+  <circle cx="130" cy="120" r="5" fill="#3366FF"/>
+  <circle cx="160" cy="120" r="5" fill="#3366FF"/>
+  <circle cx="140" cy="140" r="5" fill="#3366FF"/>
+  <circle cx="120" cy="150" r="5" fill="#3366FF"/>
+  <circle cx="160" cy="150" r="5" fill="#3366FF"/>
+</svg>
+    

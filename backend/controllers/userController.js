@@ -230,4 +230,8 @@ const verifyRazorpay = async(req,res)=>{
     }
 }
 
+
+
+
+
 export {registerUser,loginUser,getProfile,updateProfile,bookAppointment,listAppointment,cancelAppointment,paymentRazorpay,verifyRazorpay}

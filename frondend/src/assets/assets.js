@@ -31,11 +31,14 @@ import doc13 from './doc13.png'
 import doc14 from './doc14.png'
 import doc15 from './doc15.png'
 import Dermatologist from './Dermatologist.svg'
-import Gastroenterologist from './Gastroenterologist.svg'
-import General_physician from './General_physician.svg'
+import Gastroenterologist from './Gastroenterologist.jpg'
+import LivestockVet from './Livestock Vet.jpeg'
 import Gynecologist from './Gynecologist.svg'
-import Neurologist from './Neurologist.svg'
+import Neurologist from './Neurologist.jpg'
 import Pediatricians from './Pediatricians.svg'
+import Theriogenologist from './Theriogenologist.jpeg'
+import VetDermatologist from './VetDermatologist.jpeg'
+import VtNeonatologist from './VtNeonatologist.jpeg'
 
 
 export const assets = {
@@ -60,27 +63,27 @@ export const assets = {
 
 export const specialityData = [
     {
-        speciality: 'General physician',
-        image: General_physician
+        speciality: 'Livestock Vet',
+        image: LivestockVet
     },
     {
-        speciality: 'Gynecologist',
-        image: Gynecologist
+        speciality: 'Theriogenologist',
+        image: Theriogenologist
     },
     {
-        speciality: 'Dermatologist',
-        image: Dermatologist
+        speciality: 'Vet Dermatologist',
+        image: VetDermatologist
     },
     {
-        speciality: 'Pediatricians',
-        image: Pediatricians
+        speciality: 'Vet Neonatologist',
+        image: VtNeonatologist
     },
     {
-        speciality: 'Neurologist',
+        speciality: 'Vet Neurologist',
         image: Neurologist
     },
     {
-        speciality: 'Gastroenterologist',
+        speciality: 'Vet Gastroenterologist',
         image: Gastroenterologist
     },
 ]

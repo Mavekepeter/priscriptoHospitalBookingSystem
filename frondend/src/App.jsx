@@ -12,9 +12,12 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import MpesaPayment from './pages/MpesaPayment'
 
 const App = () => {
   return (
+    <div className="bg-gradient-to-br from-white via-blue-50 to-white">
+    
     <div className='mx-4 sm:mx-[10%]'>
       <ToastContainer/>
       <Navbar/>
@@ -28,8 +31,11 @@ const App = () => {
         <Route path='/my-profile' element={<Myprofile/>}/>
         <Route path='/my-appointments' element={<MyAppointment/>}/>
         <Route path='/appointment/:docId' element={<Appointment/>}/>
+        <Route path="/pay-mpesa" element={<MpesaPayment />} />
+
        </Routes>
        <Footer/>
+    </div>
     </div>
   )
 }
