@@ -3,7 +3,7 @@ import { createContext } from "react";
 export const AppContext = createContext()
 
 const AppContextProvider = (props)=>{
-    const currency ='$'
+    const currency ='Ksh'
     const calculateAge = (dob) =>{
         const today = new Date()
         const birthDate = new Date(dob)

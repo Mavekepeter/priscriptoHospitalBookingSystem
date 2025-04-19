@@ -44,7 +44,7 @@ console.log("Generated Timestamp:", timestamp); // Debugging
         PartyB: process.env.MPESA_SHORTCODE,
         PhoneNumber: phone,
         CallBackURL: process.env.MPESA_CALLBACK_URL,
-        AccountReference: 'TestPayment',
+        AccountReference: 'Animal Health Management System',
         TransactionDesc: 'Payment for services'
     };
 

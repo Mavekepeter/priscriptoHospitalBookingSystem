@@ -13,6 +13,7 @@ import Footer from './components/Footer'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import MpesaPayment from './pages/MpesaPayment'
+import Chatbot from './pages/Chatbot'
 
 const App = () => {
   return (
@@ -32,6 +33,7 @@ const App = () => {
         <Route path='/my-appointments' element={<MyAppointment/>}/>
         <Route path='/appointment/:docId' element={<Appointment/>}/>
         <Route path="/pay-mpesa" element={<MpesaPayment />} />
+        <Route path="/chatbot" element={<Chatbot/>}/>
 
        </Routes>
        <Footer/>
